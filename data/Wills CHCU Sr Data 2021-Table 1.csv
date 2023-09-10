@@ -1,0 +1,53 @@
+SIA Project-Sample #,WSU SIA Lab Sample  #,Species,Archaeological or Modern,Element (side)/Material,"Site /Location (State, Country)",Provenience & original sample # (if any),87Sr/86Sr
+WWS-0865,0865,Cucurbita pepo (squash),archaeological,peduncle,"Chetro Ketl, Chaco Canyon (New Mexico, US)","63.50.191, Specimen A",0.709471
+WWS-0866,0866,Cucurbita pepo (squash),archaeological,peduncle,"Chetro Ketl, Chaco Canyon (New Mexico, US)","63.50.191, Specimen B",0.709242
+WWS-0867,0867,Cucurbita pepo (squash),archaeological,peduncle,"Chetro Ketl, Chaco Canyon (New Mexico, US)","63.50.191, Specimen C",0.709509
+WWS-0868,0868,Cucurbita pepo (squash),archaeological,peduncle,"Chetro Ketl, Chaco Canyon (New Mexico, US)","63.50.191, Specimen D",0.709502
+WWS-0869,0869,Cucurbita pepo (squash),archaeological,peduncle,"Chetro Ketl, Chaco Canyon (New Mexico, US)","63.50.191, Specimen E",0.709233
+WWS-0870,0870,Cucurbita pepo (squash),archaeological,peduncle,"Chetro Ketl, Chaco Canyon (New Mexico, US)",63.50.192,0.709548
+WWS-0871,0871,Cucurbita pepo (squash),archaeological,peduncle,"Chetro Ketl, Chaco Canyon (New Mexico, US)",63.50.189,0.709255
+WWS-0872,0872,Cucurbita pepo (squash),archaeological,peduncle,"Chetro Ketl, Chaco Canyon (New Mexico, US)",63.50.203E,0.709607
+WWS-0873,0873,Erethizom dorsatum (porcupine),archaeological,cranial fragment,"Chetro Ketl, Chaco Canyon (New Mexico, US)","Chaco CNHP, Maxwell Museum Collection",0.707276
+WWS-0874,0874,Pinus ponderosa (ponderosa pine),modern,cone bract,"Chaco Canyon (New Mexico, US)","FS 3, Weritos Rincon",0.709861
+WWS-0875,0875,Pinus ponderosa (ponderosa pine),modern,cone bract,"Chaco Canyon (New Mexico, US)","FS 9, Weritos Rincon",waiting on data
+WWS-0876,0876,Pinus ponderosa (ponderosa pine),modern,cone bract,"Chaco Canyon (New Mexico, US)","FS 12, Weritos Rincon",0.709867
+WWS-0877,0877,Pinus ponderosa (ponderosa pine),modern,cone bract,"Chaco Canyon (New Mexico, US)",FS 016,0.709867
+WWS-0878,0878,Sylvilagus sp. (rabbit),modern,cheektooth,"Chaco Canyon (New Mexico, US)","FS 103, surface, UTM 135, 238595.69m E, 3990937.64m N, Elev: 1889m",0.709606
+WWS-0879,0879,Ovis/Capra (sheep/goat),modern,cheektooth,"Chaco Canyon (New Mexico, US)","Rock Shelter, 13S, 237029, 3994088, Elev=1882m",0.709662
+WWS-0880,0880,Lepus sp. (hare),modern,cheektooth,"Chaco Canyon (New Mexico, US)","13S 3990992 m N, 0238293 m E, Elevation: 1884 m",0.709105
+WWS-0881,0881,Sylvilagus sp. (rabbit),modern,upper cheektooth,"Chaco Canyon (New Mexico, US)","FS 117, 13S 3993711m N, 0231710m E, elev: 1961m",0.710083
+WWS-0882,0882,Cynomys sp. (prairie dog),modern,incisor,"Chaco Canyon (New Mexico, US)","FS 126, Cliff above Roberts, 13S 3989281.89m N, 0243152.64m E, Elevation: 1938m",0.709633
+WWS-0883,0883,Dipodomys sp. (kangaroo rat),modern,cheektooth,"Chaco Canyon (New Mexico, US)",Old water tank,0.709573
+WWS-0884,0884,Sylvilagus sp. (rabbit),modern,cheektooth,"Chaco Canyon (New Mexico, US)",FS#128,0.709559
+WWS-0885,0885,Sylvilagus sp. (rabbit),modern,cheektooth,"Chaco Canyon (New Mexico, US)","FS 1934, rock shelter, 13S 3994088m N, 0237029m E, Elevation: 1882m",0.709618
+WWS-0886,0886,Taxidea taxus (badger),modern,crania,"Chaco Canyon (New Mexico, US)","3991985.58N, 235113.86E, 1902 Elevation ",0.709669
+WWS-0887,0887,Sylvilagus sp. (rabbit),modern,cheektooth,"Chaco Canyon (New Mexico, US)","13S 3992218.14m N, 0234675m E, 1894 M elevatio n",0.709671
+WWS-0888,0888,Taxidea taxus (badger),modern,tooth,"Chaco Canyon (New Mexico, US)","13S 3994215m N, 0234680m E, Elevation 1905m",0.709275
+WWS-0889,0889,Capra aegagrus hircus (goat),modern,cheektooth,"Chaco Canyon (New Mexico, US)","Chaco Arroyo Bank, Erosion Piping, 13S 3990467m N, 0241120m E, Elevation 1892m",0.709316
+WWS-0890,0890,Lepus sp. (hare),modern,cheektooth,"Chaco Canyon (New Mexico, US)","FS 159, 50-70m East of Una Vida",0.709301
+WWS-0891,0891,Sylvilagus sp. (rabbit),modern,cheektooth,"Chaco Canyon (New Mexico, US)","FS 166, Weritos Rincon, 13S",0.709812
+WWS-0892,0892,Ovis/Capra (sheep/goat),modern,cheektooth,"Chaco Canyon (New Mexico, US)","FS 171, surface, 13S, 234874.23 E, 3992785.59N, 1888m",0.709576
+WWS-0893,0893,Pinus ponderosa (ponderosa pine),modern,wood,"Chaco Canyon (New Mexico, US)",FS 172 (no other provenience),0.709891
+WWS-0894,0894,Pinus ponderosa (ponderosa pine),modern,wood,"Chaco Canyon (New Mexico, US)",FS 173  (no other provenience),0.710061
+WWS-0895,0895,Pinus ponderosa (ponderosa pine),modern,pine stump,"Chaco Canyon (New Mexico, US)","FS 174, Werito's Rincon, 233543.11 E, 3990751.89 N",0.710470
+WWS-0896,0896,Microtus sp. (vole),modern,cheektooth,"Chaco Canyon (New Mexico, US)","FS 176, N:3994351 E: 233743 Elevation: 1866 Site 29SJ1625",0.709967
+WWS-0920,0920,Zea mays (maize),archaeological,cob,"Chaco Canyon (New Mexico, US)","FS 21, surface",0.710559
+WWS-0921,0921,Zea mays (maize),archaeological,cob,"Chaco Canyon (New Mexico, US)","FS 22-a, surface",0.710790
+WWS-0922,0922,Zea mays (maize),archaeological,cob,"Chaco Canyon (New Mexico, US)","FS 22-b, surface",0.710092
+WWS-0923,0923,Zea mays (maize),archaeological,cob,"Chaco Canyon (New Mexico, US)","FS 22-c, surface",0.710849
+WWS-0924,0924,Zea mays (maize),archaeological,cob,"Chaco Canyon (New Mexico, US)","FS 22-d, surface",sample not sent to WSU
+WWS-0925,0925,Zea mays (maize),archaeological,cob,"Chaco Canyon (New Mexico, US)","FS 22-e, surface",0.709964
+WWS-0926,0926,Zea mays (maize),archaeological,cob,"Chaco Canyon (New Mexico, US)","FS 23-a, surface",0.710021
+WWS-0927,0927,Zea mays (maize),archaeological,cob,"Chaco Canyon (New Mexico, US)","FS 23-b, surface",0.710197
+WWS-0928,0928,Zea mays (maize),archaeological,cob,"Chaco Canyon (New Mexico, US)","FS 7003, surface",0.712601
+WWS-0929,0929,Zea mays (maize),archaeological,cob,"Chaco Canyon (New Mexico, US)","FS 7004, surface",0.712942
+WWS-0930,0930,Zea mays (maize),archaeological,cob,"Chaco Canyon (New Mexico, US)","FS 7003, surface, UNM Survey 13S",0.711159
+WWS-0931,0931,Zea mays (maize),archaeological,cob,"Chaco Canyon (New Mexico, US)","FS 7006, surface",0.711231
+WWS-0932,0932,Zea mays (maize),archaeological,cob,"Chaco Canyon (New Mexico, US)","FS 7994, 29SJ571",0.709434
+WWS-0933,0933,Zea mays (maize),archaeological,cob,"Chaco Canyon (New Mexico, US)","FS 7995, 29SJ571",sample too small to run
+WWS-0934,0934,Zea mays (maize),archaeological,cob,"Chaco Canyon (New Mexico, US)","FS 7996, 29SJ571",0.710640
+WWS-0935,0935,Zea mays (maize),archaeological,cob,"Chaco Canyon (New Mexico, US)","FS 7997, 29SJ571",0.710240
+WWS-0936,0936,Zea mays (maize),archaeological,cob,"Chaco Canyon (New Mexico, US)","FS 7998, 29SJ571",0.710366
+WWS-0937,0937,Zea mays (maize),archaeological,cob,"Chaco Canyon (New Mexico, US)","FS 7999, 29SJ571",0.710838
+WWS-0938,0938,Zea mays (maize),archaeological,cob,"Chaco Canyon (New Mexico, US)","FS 8000, 29SJ571",0.711697
+WWS-0939,0939,Zea mays (maize),archaeological,cob,"Chaco Canyon (New Mexico, US)","FS 8001, 29SJ571",0.710973

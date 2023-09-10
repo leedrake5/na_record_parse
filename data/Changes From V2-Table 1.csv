@@ -1,0 +1,63 @@
+Change Made,Reason,,Corrections,,COLUMN HEADER COLOR GUIDE
+"Reorganized ""Type"" columns to be together and relabeled Type and Material Type to ""Specimen_Type"" and ""Tissue_Type""; added a column ""Bone/Tooth_Type""",To allow fine grained sorting of the data at a later date; to make it easier to quickly identify what different samples are,,Strontium,,Data from orginal table to keep
+"Moved Site_Name, Site_Number, and Provenience Columns over to be next to Radiocarbon_Lab_No",To make the spreadsheet flow a little better,,"For Sr, NBS std value is 0.71029",,Data from original table to clean up/process/delete
+"Added columns for Genus, Species, Tooth/Bone Type, etc",Easier data processing,,Sr corrections = Sample Value - (NBS reported - NBS std),,Compiled Columns
+"Relabeled column ""Correcter Sr (Marian Spreadsheet)"" to ""Sr87/Sr86 Calibrated to NBS Standard""",For clarity,,,,Data added
+"Removed columns: ""Estimated %C4 (+/- 5)"" , ""Calculated %C4 (+/- 10)"", ""mg bone"", ""mg > 30 kD extract"", and ""%Collagen Yield""",For clarity/ease of reading other data; extraneous for raw data processing,,Oxygen,,Correction columns
+"Removed columns: ""#calculated pre-industrial pure C3 d13Cbioapatite"", ""!calculated pre-industrial pure C4 d13Cbioapatite"", and ""$estimated %C4""",For clarity/ease of reading other data; these columns came from an inherited UNM Isotope organization spreadsheet and I'm not sure what they mean,,VPDB = (VSMOW-30.91)/1.03091,,To Be Deleted
+Created a master Sr87/Sr86 column for raw Sr data and collated all Sr ratio data to this column,,,1M prep correction: 0.1M = 1M+0.36,,
+Removed ppm Sr columns (applies to data from Ezzo et al 1997),"Publication also has ratio data for same samples, which are better for comparison with other data",,,,
+"Added ""Sr Standard Value"" Column",For correction based on standard values reported for Sr analysis in each publication,,Carbon,,
+"""Minimum δ18O bioapatite"" and ""Minimum  δ18O bioapatite standard deviation"" only apply to a single publication and have been removed from the cleaned up spreadsheet (see master Dec 09 version for these columns)",Removed for clarity of data,,Seuss eeffect: Arch = Modern - 2 per mil,,
+"""Corrected δ13 C bioapatite [with note a]"" was relabeled to ""Suess Correction, δ13 C bioapatite ""; values in that original column only came from Grimstead et al 2016 and were corrected with a value of 1.5, these were deleted; this column will be used for all applicable data with a correction factor of 2",Consistency in Seuss corrections and renamed for clarity,,"Bone collagen, all mammals: Diet = Collagen - 5",,
+"Added columns for d13C of: Collagen, bone apatite, enamel, vegetation, hair; also added SD columns with each",To reorganize and minimize the number of d13C columns in the sheet; these columns will have d13C data added and older columns deleted as appropriate.,,Bone apatite and enamel:,,
+"""Calculated diet d13C (%o)"" removed ","A correction factor of 4.5 per mil was applied in this column but we want to be consistent, so these corrected values were removed and all data will be corrected using the same factors",,Rodents: Diet = enamel -10.3,,
+"Under ""Citations"" Tab added information in methods and Sr standards column for corrections",For corrections,,Rabbits: Diet = enamel - 12.8,,
+Added Wills 2021 Sr Data,Updated data set,,Large non-ruminant mammals: Diet = enamel - 13.3,,
+Added Summary.ChacoFaunalIsotopes spreadsheet data to compiled data,Updated data set,,Ruminant mammals: Diet = enamel - 14.1,,
+,,,Birds: Diet = enamel - 9.7 (Somerville et al 2010),,
+,,,Carnivores: Diet = enamel -12 (humans?),,
+,,,,,
+,,," Hair: Diet. = hair-2 (DeNiro and Epstein, 1978, Ambrose and Norr, 1993, Tieszen and Fagre, 1993, Smith et al 2010 (chimp paper*))",,
+,,,,,
+Marian's Notes ,,,,,
+**Note: did not touch lead isotope data**,,,,,
+Changes:,,,,,Column colors revised
+"for 537,8, 9 moved identifiers from unique ID"" to ""other ID"" column and deleted ""unique id column",,,,,Clean raw data from sources 
+"For 5084- 5149 changed ""bone collagen"" to ""Bone"" and added ""collagen"" in separate column",,,,,Correction factors
+"For 328- 528 changed specimen type to ""Soil""",,,,,Corrected data 
+"Added ""Tooth"" as specimen type for dudas et al 2016 and specified paired dentin and enamel measurements",,,,,Axillary data 
+Removed %c4 column (relevant to grimstead data only),,,,,
+"Lewis 2018 dissertation faunal data is arch, not modern, from Cedar Mesa",,,,,
+Lewis 2018 plant data had duplicate %C and %N in some samples; removed the %N number (highlighted in dark yellow),,,,,Data to add and revise/review
+Deleted yellow carbon data columns after moving data to appropriate green columns,,,,,
+"Added in ‘axillary information’ columns in salmon color (%C, %N)",,,,,
+"Removed “Wt%C” data from Monocle et al 2018 columns (it was C:N ratios, not %C)",,,,,
+"Combined “Wt%C” and “%C” columns, deleted %C column",,,,,
+Deleted collagen/apatite/vegetation/hair SD columns (no data),,,,,
+Separated Sr data into enamel and non-enamel columns,,,,,
+Combined two delta-N columns into d15N column only,,,,,
+,,,,,
+Removed duplicate data (Grimstead) - still certainly some duplicates left,,,,,
+Standardized dark blue column entries. Comma means 'and' for types of data in the row. ,,,,,
+,,,,,
+These rows contain a sample but not any data ,,,,,
+The data in these rows does not match the source - check and revise ,,,,,
+,,,,,
+All carbon data has appropriate Seuss correction factor,,,,,
+Collagen carbon data has adjustment to vegetation baseline (collagen - 5 = vegetation diet),,,,,
+,,,,,
+Created CID numbers for all samples ,,,,,
+,,,,,
+KW Notes 2,,,,,
+Added column for Isotope Systems,,,,,
+,,,,,
+Marian 2,,,,,
+Sr/Sr value corrections completed,,,,,
+"Carbon enamel faunal-specific corrections applied (based on ""Group"" column)",,,,,
+Added apatite-diet offset for birds of 9.7 and humans of 12,,,,,
+Added diet-hair offset of Diet=hair-2,,,,,
+"Completed vegetation Suess correction (modern+2, arch stays the same)",,,,,
+,,,,,
+"**I don't love the apatite-diet offset numbers we have, the story there might be much more complicated**",,,,,
+"**all carbon is done except for vegetation, which I'm not sure if we need to do anything with**",,,,,

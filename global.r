@@ -71,7 +71,7 @@ season_types <- unique(sg)
 proxy_types <- unique(pg)
 
 mis_assign <- function(simple_merge){
-    simple_merge$age <- simple_merge$age*-1000
+    simple_merge$age <- simple_merge$age*-1
     simple_merge$MIS_stage <- NA
     simple_merge[simple_merge$age > -14000 & simple_merge$age <= 0, "MIS_stage"] <- "MIS_001"
     simple_merge[simple_merge$age > -29000 & simple_merge$age <= -14000, "MIS_stage"] <- "MIS_002"
@@ -176,7 +176,7 @@ mis_assign <- function(simple_merge){
     simple_merge[simple_merge$age > -2554000 & simple_merge$age <= -2540000, "MIS_stage"] <- "MIS_101"
     simple_merge[simple_merge$age > -2575000 & simple_merge$age <= -2554000, "MIS_stage"] <- "MIS_102"
     simple_merge[simple_merge$age > -2595000 & simple_merge$age <= -2575000, "MIS_stage"] <- "MIS_103"
-    simple_merge$age <- simple_merge$age/-1000
+    simple_merge$age <- simple_merge$age/-1
     simple_merge <- simple_merge[complete.cases(simple_merge),]
     simple_merge$MIS_stage <- as.character(simple_merge$MIS_stage)
     return(simple_merge)

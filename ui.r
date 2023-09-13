@@ -47,6 +47,7 @@ navbarPage("North American Paleoclimatic Index Database", id="nav",
         uiOutput("unit_type_ui"),
         checkboxInput("scale", "Scale", value=TRUE),
         sliderInput("moving_average", "Years to Average", min=0, max=1000, value=100),
+        sliderInput("age_range", "Age Range", min=0, max=250000, value=c(0, 250000))
 
 
 

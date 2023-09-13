@@ -120,12 +120,18 @@ function(input, output, session) {
   dataFrameRaw <- reactive({
       
       data_list <- dataPull()
-      
-      if(input$scale==TRUE){
-          simple_merge <- data.frame(age=unlist(sapply(data_list, function(x) x$age)), value=unlist(sapply(data_list, function(x) scaleTransform(x$paleoData_values))), doi=unlist(sapply(data_list, function(x) rep(x$pub1_doi, length(x$paleoData_values)))))
-      } else if(input$scale==FALSE){
-          simple_merge <- data.frame(age=unlist(sapply(data_list, function(x) x$age)), value=unlist(sapply(data_list, function(x) x$paleoData_values)), doi=unlist(sapply(data_list, function(x) rep(x$pub1_doi, length(x$paleoData_values)))))
+      if(length(data_list) > 1){
+          if(input$scale==TRUE){
+              simple_merge <- data.frame(age=unlist(sapply(data_list, function(x) x$age)), value=unlist(sapply(data_list, function(x) scaleTransform(x$paleoData_values))), doi=unlist(sapply(data_list, function(x) rep(x$pub1_doi, length(x$paleoData_values)))))
+          } else if(input$scale==FALSE){
+              simple_merge <- data.frame(age=unlist(sapply(data_list, function(x) x$age)), value=unlist(sapply(data_list, function(x) x$paleoData_values)), doi=unlist(sapply(data_list, function(x) rep(x$pub1_doi, length(x$paleoData_values)))))
+          }
+      } else if(length(data_list)==1){
+          simple_merge <- data.frame(age=data_list[["age"]], value=data_list[["paleoData_values"]], doi=rep(data_list[["pub1_doi"]], length(data_list[["paleoData_values"]])))
+      } else if(length(data_list)==0){
+          NULL
       }
+      
       
       simple_merge <- simple_merge[simple_merge$doi %in% zipsInBounds()$pub1_doi,]
       simple_merge <- simple_merge[complete.cases(simple_merge),]
@@ -145,7 +151,7 @@ function(input, output, session) {
 			simple_merge_years <- data.table::as.data.table(simple_merge_years)
 			data.table::setkey(simple_merge, age)
 			data.table::setkey(simple_merge_years, age)
-			simple_merge <- as.data.frame(merge(simple_merge, simple_merge_years, by = "age"))
+			simple_merge <- as.data.frame(merge(simple_merge, simple_merge_years, by = "age", all=T, fill=T))
 			simple_merge <- simple_merge %>%
     			mutate(value = na.approx(value))
 
@@ -166,7 +172,8 @@ function(input, output, session) {
 			simple_merge <- dataFrameRaw()
 		}
 
-		simple_merge <- mis_assign(simple_merge)
+		#simple_merge <- mis_assign(simple_merge)
+        simple_merge
 
 	})
 
@@ -185,7 +192,7 @@ function(input, output, session) {
       ggplot(simple_merge, aes(age, value)) +
       geom_line() + 
       scale_y_continuous(y_lab) +
-      scale_x_continuous("cal years BP", labels=scales::comma) +
+      scale_x_continuous("cal years BP", labels=scales::comma, limits=input$age_range) +
       theme_light()
       
       

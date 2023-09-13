@@ -130,20 +130,15 @@ function(input, output, session) {
       simple_merge <- simple_merge[simple_merge$doi %in% zipsInBounds()$pub1_doi,]
       simple_merge <- simple_merge[complete.cases(simple_merge),]
       
-      simple_merge <- mis_assign(simple_merge)
-
-   
-      
       simple_merge
       
   })
 
-	dataFrame <- reactive({
+	dataFramePrep <- reactive({
 		simple_merge <- dataFrameRaw()
 
-		
-
-		if(input$moving_average>1){
+		if(input$moving_average>0){
+			simple_merge <- simple_merge[,c("age", "value")]
 			simple_merge$age <- simple_merge$age*100
           	simple_merge_years <- data.frame(age=seq(round(min(simple_merge$age), 0), round(max(simple_merge$age), 0), 1))
 			simple_merge <- data.table::as.data.table(simple_merge)
@@ -151,18 +146,27 @@ function(input, output, session) {
 			data.table::setkey(simple_merge, age)
 			data.table::setkey(simple_merge_years, age)
 			simple_merge <- as.data.frame(data.table::fset(simple_merge, simple_merge_years, by = "id"))
-
-			
+			simple_merge <- simple_merge %>%
+    			mutate(value = na.approx(value))
       	}
 	
 	})
 
 
-   if(input$moving_average>1){
-          simple_merge_years <- data.frame(age=seq(round(min(simple_merge$age, )
-          
-      }
-  
+	dataFrame <- reactive({
+		
+		if(input$moving_average>1){
+		simple_merge <- dataFramePrep()
+  			simple_merge$value <- TTR::DEMA(simple_merge$value, input$moving_average)
+		} else if(input$moving_average==0){
+			simple_merge <- dataFrameRaw()
+		}
+
+		simple_merge <- mis_assign(simple_merge)
+
+	})
+
+
   
   climatePlot <- reactive({
       

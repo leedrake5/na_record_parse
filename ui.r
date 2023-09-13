@@ -46,7 +46,7 @@ navbarPage("North American Paleoclimatic Index Database", id="nav",
         uiOutput("proxy_type_ui"),
         uiOutput("unit_type_ui"),
         checkboxInput("scale", "Scale", value=TRUE),
-        sliderInput("moving_average", "Year Average", min=1, max=100, value=10),
+        sliderInput("moving_average", "Century Average", min=0, max=100, value=10),
 
         plotOutput("climate_plot", height = 250),
 

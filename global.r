@@ -1,6 +1,7 @@
 library(dplyr)
 library(rgdal)
 library(lipdR)
+library(zoo)
 
 lm_eqn = function(m) {
     

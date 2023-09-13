@@ -78,7 +78,7 @@ function(input, output, session) {
   
   output$proxy_type_ui <- renderUI({
       
-      selectInput("proxy_type", "Proxy", choices=c("All", proxy_types), selected="All")
+      selectInput("proxy_type", "Proxy", choices=c("All", proxy_types), selected="isotope")
       
   })
   
@@ -91,7 +91,7 @@ function(input, output, session) {
   
   output$unit_type_ui <- renderUI({
       
-      selectInput("unit_type", "Units", choices=unit_types, selected="degC")
+      selectInput("unit_type", "Units", choices=unit_types, selected="permil")
       
   })
   
@@ -139,18 +139,20 @@ function(input, output, session) {
 
 		if(input$moving_average>0){
 			simple_merge <- simple_merge[,c("age", "value")]
-			simple_merge$age <- simple_merge$age*100
+			#simple_merge$age <- simple_merge$age*100
           	simple_merge_years <- data.frame(age=seq(round(min(simple_merge$age), 0), round(max(simple_merge$age), 0), 1))
 			simple_merge <- data.table::as.data.table(simple_merge)
 			simple_merge_years <- data.table::as.data.table(simple_merge_years)
 			data.table::setkey(simple_merge, age)
 			data.table::setkey(simple_merge_years, age)
-			simple_merge <- as.data.frame(data.table::fset(simple_merge, simple_merge_years, by = "id"))
+			simple_merge <- as.data.frame(merge(simple_merge, simple_merge_years, by = "age"))
 			simple_merge <- simple_merge %>%
     			mutate(value = na.approx(value))
 
-			simple_merge$age <- simple_merge$age/100
+			#simple_merge$age <- simple_merge$age/100
       	}
+        
+        simple_merge
 	
 	})
 
@@ -174,10 +176,16 @@ function(input, output, session) {
       
       simple_merge <- dataFrame()
       
+      y_lab <- if(input$scale==TRUE){
+          paste0("Scaled ", input$unit_type)
+      } else if(input$scale==FALSE){
+          input$unit_type
+      }
+      
       ggplot(simple_merge, aes(age, value)) +
       geom_line() + 
-      scale_y_continuous(input$unit_type) +
-      scale_x_continuous("kiloyears") +
+      scale_y_continuous(y_lab) +
+      scale_x_continuous("cal years BP", labels=scales::comma) +
       theme_light()
       
       

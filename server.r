@@ -117,7 +117,7 @@ function(input, output, session) {
 
   })
   
-  dataFrame <- reactive({
+  dataFrameRaw <- reactive({
       
       data_list <- dataPull()
       
@@ -131,15 +131,37 @@ function(input, output, session) {
       simple_merge <- simple_merge[complete.cases(simple_merge),]
       
       simple_merge <- mis_assign(simple_merge)
-      
-      if(input$moving_average>1){
-          simple_merge_years <- data.frame(age=seq(min())
-          
-      }
+
+   
       
       simple_merge
       
   })
+
+	dataFrame <- reactive({
+		simple_merge <- dataFrameRaw()
+
+		
+
+		if(input$moving_average>1){
+			simple_merge$age <- simple_merge$age*100
+          	simple_merge_years <- data.frame(age=seq(round(min(simple_merge$age), 0), round(max(simple_merge$age), 0), 1))
+			simple_merge <- data.table::as.data.table(simple_merge)
+			simple_merge_years <- data.table::as.data.table(simple_merge_years)
+			data.table::setkey(simple_merge, age)
+			data.table::setkey(simple_merge_years, age)
+			simple_merge <- as.data.frame(data.table::fset(simple_merge, simple_merge_years, by = "id"))
+
+			
+      	}
+	
+	})
+
+
+   if(input$moving_average>1){
+          simple_merge_years <- data.frame(age=seq(round(min(simple_merge$age, )
+          
+      }
   
   
   climatePlot <- reactive({

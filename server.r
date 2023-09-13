@@ -148,6 +148,8 @@ function(input, output, session) {
 			simple_merge <- as.data.frame(data.table::fset(simple_merge, simple_merge_years, by = "id"))
 			simple_merge <- simple_merge %>%
     			mutate(value = na.approx(value))
+
+			simple_merge$age <- simple_merge$age/100
       	}
 	
 	})

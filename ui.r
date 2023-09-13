@@ -40,7 +40,17 @@ navbarPage("North American Paleoclimatic Index Database", id="nav",
         #plotOutput("histCentile", height = 200),
         #checkboxInput("uselabs", "Legend", value=FALSE),
         uiOutput("isodensselectui"),
-        plotOutput("isoDens", height = 250)
+        plotOutput("isoDens", height = 250),
+        uiOutput("archive_type_ui"),
+        uiOutput("season_type_ui"),
+        uiOutput("proxy_type_ui"),
+        uiOutput("unit_type_ui"),
+        checkboxInput("scale", "Scale", value=TRUE),
+        sliderInput("moving_average", "Year Average", min=1, max=100, value=10),
+
+        plotOutput("climate_plot", height = 250),
+
+
       ),
 
       tags$div(id="cite",

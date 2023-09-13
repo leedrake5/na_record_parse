@@ -72,20 +72,91 @@ function(input, output, session) {
   
   output$archive_type_ui <- renderUI({
       
-      selectInput("archive_type", "Archive", choices=archive_types, selected="Speleothem")
+      selectInput("archive_type", "Archive", choices=c("All", archive_types), selected="All")
       
   })
   
   output$proxy_type_ui <- renderUI({
       
-      selectInput("proxy_type", "Archive", choices=proxy_types, selected="isotope")
+      selectInput("proxy_type", "Proxy", choices=c("All", proxy_types), selected="All")
       
   })
   
   output$season_type_ui <- renderUI({
       
-      selectInput("season_type", "Archive", choices=proxy_types, selected="annual")
+      selectInput("season_type", "Season", choices=season_types, selected="annual")
       
+  })
+  
+  
+  output$unit_type_ui <- renderUI({
+      
+      selectInput("unit_type", "Units", choices=unit_types, selected="degC")
+      
+  })
+  
+  dataPull <- reactive({
+      
+
+      data_unit = which(ug == input$unit_type)
+      data_season = which(sg == input$season_type)
+      data_sub = data_unit[data_unit %in% data_season]
+
+      if(input$proxy_type != "All"){
+          data_proxy = which(pg == input$proxy_type)
+          data_sub = data_unit[data_sub %in% data_proxy]
+      }
+      
+      if(input$archive_type != "All"){
+          data_archive = which(ag == input$archive_type)
+          data_sub = data_unit[data_sub %in% data_archive]
+      }
+      
+      
+      TS[data_sub]
+
+  })
+  
+  dataFrame <- reactive({
+      
+      data_list <- dataPull()
+      
+      if(input$scale==TRUE){
+          simple_merge <- data.frame(age=unlist(sapply(data_list, function(x) x$age)), value=unlist(sapply(data_list, function(x) scaleTransform(x$paleoData_values))), doi=unlist(sapply(data_list, function(x) rep(x$pub1_doi, length(x$paleoData_values)))))
+      } else if(input$scale==FALSE){
+          simple_merge <- data.frame(age=unlist(sapply(data_list, function(x) x$age)), value=unlist(sapply(data_list, function(x) x$paleoData_values)), doi=unlist(sapply(data_list, function(x) rep(x$pub1_doi, length(x$paleoData_values)))))
+      }
+      
+      simple_merge <- simple_merge[simple_merge$doi %in% zipsInBounds()$pub1_doi,]
+      simple_merge <- simple_merge[complete.cases(simple_merge),]
+      
+      simple_merge <- mis_assign(simple_merge)
+      
+      if(input$moving_average>1){
+          simple_merge_years <- data.frame(age=seq(min())
+          
+      }
+      
+      simple_merge
+      
+  })
+  
+  
+  climatePlot <- reactive({
+      
+      simple_merge <- dataFrame()
+      
+      ggplot(simple_merge, aes(age, value)) +
+      geom_line() + 
+      scale_y_continuous(input$unit_type) +
+      scale_x_continuous("kiloyears") +
+      theme_light()
+      
+      
+  })
+  
+  output$climate_plot <- renderPlot({
+      climatePlot()
   })
   
   
@@ -177,14 +248,15 @@ function(input, output, session) {
 
     leafletProxy("map", data = zipdata) %>%
       clearShapes() %>%
-      addCircleMarkers(~lon, ~lat, radius=20, layerId=~ID,
+      addCircleMarkers(~lon, ~lat, radius=20, layerId=~pub1_doi,
         stroke=FALSE, fillOpacity=0.4, fillColor=pal(colorData)) %>%
       addLegend("bottomleft", pal=pal, values=colorData, title=colorBy,
         layerId="colorLegend")
   })
+  
 
   showZipcodePopup <- function(zipcode, lat, lng) {
-    selectedZip <- metadata[metadata$ID == zipcode,]
+    selectedZip <- metadata[metadata$pub1_doi == zipcode,]
     selectedZip <- selectedZip[1,]
     content <- as.character(tagList(
       tags$h4(as.character(selectedZip$siteName)),

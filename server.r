@@ -177,6 +177,19 @@ function(input, output, session) {
 
 	})
 
+    climate_ranges <- reactiveValues(x = NULL, y = NULL)
+
+            observeEvent(input$plot_climate_dblclick, {
+                brush <- input$plot_climate_brush
+                if (!is.null(brush)) {
+                    climate_ranges$x <- c(brush$xmin, brush$xmax)
+                    
+                } else {
+                    climate_ranges$x <- NULL
+                }
+            })
+            
+
 
   
   climatePlot <- reactive({
@@ -192,7 +205,7 @@ function(input, output, session) {
       ggplot(simple_merge, aes(age, value)) +
       geom_line() + 
       scale_y_continuous(y_lab) +
-      scale_x_continuous("cal years BP", labels=scales::comma, limits=input$age_range) +
+      scale_x_continuous("cal years BP", labels=scales::comma, limits=climate_ranges$x) +
       theme_light()
       
       

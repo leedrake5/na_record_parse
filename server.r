@@ -227,39 +227,6 @@ function(input, output, session) {
       
   })
 
-  output$scatterCollegeIncome <- renderPlot({
-    # If no zipcodes are in view, don't plot
-    if (nrow(zipsInBounds()) == 0)
-      return(NULL)
-      
-      colorBy <- input$color
-      sizeBy <- input$size
-      
-      cor.test <- lm(as.numeric(as.vector(zipsInBounds()[[colorBy]])) ~ as.numeric(as.vector(zipsInBounds()[[sizeBy]])))
-      
-      r2 <- summary(cor.test)$r.squared
-      intercept <- cor.test$coef[1]
-      slope <- cor.test$coef[2]
-      
-
-#print(xyplot(zipsInBounds()[[colorBy]] ~ zipsInBounds()[[sizeBy]], xlab=sizeBy, ylab=colorBy, type=c("p", "r"), main=expression(paste("y ="*paste(slope)*"x + "*paste(intercept)*", r"^2*paste(r2)))))
-
-    temp.frame <- data.frame(as.numeric(as.vector(zipsInBounds()[[sizeBy]])), as.numeric(as.vector(zipsInBounds()[[colorBy]])))
-    colnames(temp.frame) <- c("x", "y")
-    temp.frame <- na.omit(temp.frame)
-    
-    scatter <- ggplot(aes(x, y), data=temp.frame) +
-    geom_point(colour="blue") +
-    stat_smooth(method="lm") +
-    theme_light() +
-    scale_x_continuous(sizeBy) +
-    scale_y_continuous(colorBy) +
-     annotate("text", label=lm_eqn(cor.test), x=0, y=Inf, hjust=0, vjust=1, parse=TRUE) 
-    
-    scatter
-  })
-  
-
 
   # This observer is responsible for maintaining the circles and legend,
   # according to the variables the user has chosen to map to color and size.
@@ -300,13 +267,23 @@ function(input, output, session) {
 
   showZipcodePopup <- function(zipcode, lat, lng) {
     selectedZip <- metadata[metadata$pub1_doi == zipcode,]
+	timeseries_data <- dataFrameRaw()[dataFrameRaw()$doi == zipcode,]	
+	timeseries_plot <- ggplot(timeseries_data, aes(age, value)) + 
+		geom_line() +  
+      	scale_y_continuous(y_lab) +
+      	scale_x_continuous("cal years BP", labels=scales::comma) +
+      	theme_light()
+	
+
+
+
     selectedZip <- selectedZip[1,]
     content <- as.character(tagList(
       tags$h4(as.character(selectedZip$siteName)),
       paste0("Min: ", round(selectedZip$minYear, 0)), tags$br(),
       paste0("Max: ", round(selectedZip$maxYear, 0)), tags$br(),
       paste0("Resolution: ", round(selectedZip$agesPerKyr*1000), " years"),
-      tags$hr(),
+      timeseries_plot,
       paste0("Archive Type: ", selectedZip$archiveType), tags$br(),
       paste0("Proxy Record: ", selectedZip$proxy)), tags$br(),
       paste0("Seasonailty: ", selectedZip$seasonGeneral)
@@ -369,7 +346,7 @@ function(input, output, session) {
   
   
   output$downloaddata <- downloadHandler(
-  filename = function() { paste("chacoData", '.csv', sep=',') },
+  filename = function() { paste("northAmerica_subset", '.csv') },
   content = function(file
   ) {
       write.csv(reactiveZip(), file)

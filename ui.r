@@ -41,13 +41,13 @@ navbarPage("North American Paleoclimatic Index Database", id="nav",
         #checkboxInput("uselabs", "Legend", value=FALSE),
         uiOutput("isodensselectui"),
         plotOutput("climate_plot", height = 250),
+        sliderInput("age_range", "Age Range", min=0, max=250000, value=c(0, 250000)),
         uiOutput("archive_type_ui"),
         uiOutput("season_type_ui"),
         uiOutput("proxy_type_ui"),
         uiOutput("unit_type_ui"),
         checkboxInput("scale", "Scale", value=TRUE),
-        sliderInput("moving_average", "Years to Average", min=0, max=1000, value=100),
-        sliderInput("age_range", "Age Range", min=0, max=250000, value=c(0, 250000))
+        sliderInput("moving_average", "Years to Average", min=0, max=1000, value=100)
 
 
 

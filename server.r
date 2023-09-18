@@ -122,9 +122,9 @@ function(input, output, session) {
       data_list <- dataPull()
       if(length(data_list) > 1){
           if(input$scale==TRUE){
-              simple_merge <- data.frame(age=unlist(sapply(data_list, function(x) x$age)), value=unlist(sapply(data_list, function(x) scaleTransform(x$paleoData_values))), doi=unlist(sapply(data_list, function(x) rep(x$pub1_doi, length(x$paleoData_values)))))
+              simple_merge <- data.frame(age=unlist(sapply(data_list, function(x) x$age)), value=unlist(sapply(data_list, function(x) scaleTransform(x$paleoData_values))), doi=as.character(unlist(sapply(data_list, function(x) rep(x$pub1_doi, length(x$paleoData_values))))))
           } else if(input$scale==FALSE){
-              simple_merge <- data.frame(age=unlist(sapply(data_list, function(x) x$age)), value=unlist(sapply(data_list, function(x) x$paleoData_values)), doi=unlist(sapply(data_list, function(x) rep(x$pub1_doi, length(x$paleoData_values)))))
+              simple_merge <- data.frame(age=unlist(sapply(data_list, function(x) x$age)), value=unlist(sapply(data_list, function(x) x$paleoData_values)), doi=as.character(unlist(sapply(data_list, function(x) rep(x$pub1_doi, length(x$paleoData_values))))))
           }
       } else if(length(data_list)==1){
           simple_merge <- data.frame(age=data_list[["age"]], value=data_list[["paleoData_values"]], doi=rep(data_list[["pub1_doi"]], length(data_list[["paleoData_values"]])))
@@ -205,7 +205,7 @@ function(input, output, session) {
       ggplot(simple_merge, aes(age, value)) +
       geom_line() + 
       scale_y_continuous(y_lab) +
-      scale_x_continuous("cal years BP", labels=scales::comma, limits=climate_ranges$x) +
+      scale_x_continuous("cal years BP", labels=scales::comma, limits=input$age_range) +
       theme_light()
       
       
@@ -272,7 +272,7 @@ function(input, output, session) {
     leafletProxy("map", data = zipdata) %>%
       clearShapes() %>%
       addCircleMarkers(~lon, ~lat, radius=20, layerId=~pub1_doi,
-        stroke=FALSE, fillOpacity=0.4, fillColor=pal(colorData)) %>%
+        stroke=FALSE, fillOpacity=0.4, fillColor=pal(colorData), group="markers") %>%
       addLegend("bottomleft", pal=pal, values=colorData, title=colorBy,
         layerId="colorLegend")
   })
@@ -280,15 +280,29 @@ function(input, output, session) {
 
   showZipcodePopup <- function(zipcode, lat, lng) {
     selectedZip <- metadata[metadata$pub1_doi == zipcode,]
-	timeseries_data <- dataFrameRaw()[dataFrameRaw()$doi == zipcode,]	
-	timeseries_plot <- ggplot(timeseries_data, aes(age, value)) + 
+    
+    timeseries_list <- TS[which(doi==zipcode)]
+    
+    
+    
+	timeseries_data <- data.frame(age=as.numeric(timeseries_list[[1]]$age), value=as.numeric(timeseries_list[[1]]$paleoData_values))
+    
+    y_lab <- timeseries_list[[1]]$paleoData_proxy
+    
+	timeseries_plot <- ggplot(timeseries_data, aes(age, value)) +
 		geom_line() +  
       	scale_y_continuous(y_lab) +
       	scale_x_continuous("cal years BP", labels=scales::comma) +
       	theme_light()
 	
-
-
+    fldr <- tempfile()
+    dir.create(fldr)
+    print(fldr)
+    ggsave(filename = paste(fldr, "test.png", sep = "/"), timeseries_plot)
+    img_path <- gsub("//", "/", paste(fldr, "test.png", sep = "/"))
+    print(img_path)
+    #tst <- paste(readLines(paste(fldr, "test.png", sep = "/")), collapse = "")
+    #print(tst)
 
     selectedZip <- selectedZip[1,]
     content <- as.character(tagList(
@@ -296,12 +310,20 @@ function(input, output, session) {
       paste0("Min: ", round(selectedZip$minYear, 0)), tags$br(),
       paste0("Max: ", round(selectedZip$maxYear, 0)), tags$br(),
       paste0("Resolution: ", round(selectedZip$agesPerKyr*1000), " years"),
-      timeseries_plot,
       paste0("Archive Type: ", selectedZip$archiveType), tags$br(),
-      paste0("Proxy Record: ", selectedZip$proxy)), tags$br(),
-      paste0("Seasonailty: ", selectedZip$seasonGeneral)
-      )
+      paste0("Proxy Record: ", selectedZip$proxy), tags$br(),
+      paste0("Seasonailty: ", selectedZip$seasonGeneral), tags$br()
+      #paste0(includeHTML(paste0(fldr, "/test.svg")))
+      ))
+      
+      next_content <- sprintf(
+      paste0('<img src="', paste(fldr, 'test.png', sep = '/'), '" />')
+      ) %>% lapply(htmltools::HTML)
+      
+      
     leafletProxy("map") %>% addPopups(lng, lat, content, layerId = zipcode)
+    
+    #leafpop::addPopupImages(paste0("<img src='", img_path, "' />"), group="markers")
   }
 
   # When map is clicked, show a popup with city info

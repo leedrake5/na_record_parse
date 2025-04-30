@@ -25,7 +25,7 @@ if(get_os()!="linux"){
     if(length(new.packages)) lapply(new.packages, function(x) install.packages(x, repos="http://cran.rstudio.com/", dep = TRUE, ask=FALSE, type="source"))
 }
 
-if("caret" %in% installed.packages()[,"Package"]==FALSE){
+if("lipdR" %in% installed.packages()[,"Package"]==FALSE){
     remotes::install_github("nickmckay/lipdR")
 }
 

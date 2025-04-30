@@ -28,8 +28,6 @@ navbarPage("North American Paleoclimatic Index Database", id="nav",
 
         #textInput("yourzipcode", "Zip Code", value="87108"),
 
-        tags$hr(),
-
         selectInput("color", "Color", varsColor, selected="archiveType"),
         #selectInput("size", "Size", varsSize, selected = "income"),
         conditionalPanel("input.color == 'superzip' || input.size == 'superzip'",

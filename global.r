@@ -1,5 +1,36 @@
+
+get_os <- function(){
+    sysinf <- Sys.info()
+    if (!is.null(sysinf)){
+        os <- sysinf['sysname']
+        if (os == 'Darwin')
+        os <- "osx"
+    } else { ## mystery machine
+        os <- .Platform$OS.type
+        if (grepl("^darwin", R.version$os))
+        os <- "osx"
+        if (grepl("linux-gnu", R.version$os))
+        os <- "linux"
+    }
+    tolower(os)
+}
+
+
+list.of.packages <- c("dplyr", "zoo", "shiny", "ggpolot2", "scales", "lattice", "data.table", "DT", "remotes")
+
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(get_os()!="linux"){
+    if(length(new.packages)) lapply(new.packages, function(x) install.packages(x, repos="http://cran.rstudio.com/", dep = TRUE, ask=FALSE, type="binary"))
+} else if(get_os()=="linux"){
+    if(length(new.packages)) lapply(new.packages, function(x) install.packages(x, repos="http://cran.rstudio.com/", dep = TRUE, ask=FALSE, type="source"))
+}
+
+if("caret" %in% installed.packages()[,"Package"]==FALSE){
+    remotes::install_github("nickmckay/lipdR")
+}
+
 library(dplyr)
-library(rgdal)
+#library(rgdal)
 library(lipdR)
 library(zoo)
 #library(mapview)
